@@ -74,7 +74,7 @@ if __name__ == "__main__":
         rules = load_merges("merges.txt")
         print(f"Se cargaron {len(rules)} reglas.")
 
-        input_text = "Quijo"
+        input_text = "Quijote"
 
         tokens = encode(input_text, rules)
         visual_tokents = debug_tokens(tokens, rules)
