@@ -15,3 +15,22 @@ El tokenizer consistira en 3 programas. El primero ("byte_converter") tomara el 
 
 Para entrenar el tokenizer se eligio como corpus el texto "Don Quijote" por Miguel de Cervantes Saavedra (1605 y 1615). Una reconocida obra literaria del habla hispana. Usar dicha obra permitira luego el analisis de codificacion con palabras de habla moderna como "computadora".
 El tokenizer podria ser entrenado con otro texto si se desea, dado que el resultado de los tokens depende de la entrada al sistema, el corpus.
+
+## Utilizacion de expresiones regulares
+Copiando el metodo visto en el paper de GPT-2 para evitar tener tokens de mas de una palabra o tokens repetidos por cada palabra y un signo de puntuacion, siguiendo el ejemplo que el mismo paper da, es ineficiente tener todos los siguientes tokens
+'''
+'dog'
+'dog?'
+'dog!'
+'dog.'
+'dog,'
+'''
+Para evitar tener multiples tokens por cada palabra se usan expresiones regulares para forzar a que se eviten cierto tipo de merges o reglas.
+
+El que puede verse aplicado a GPT-2 es el siguiente patron (quitando todos casos de apostrofe y letra que no aplican para el español)
+
+r""" ?\p{L}+| ?\p{N}+| ?[^\s\p{L}\p{N}]+|\s+(?!\S)|\s+"""
+
+Dado que mi bpe final fue realizado en C++ el patron cambia a
+
+R"( ?[a-zA-ZáéíóúÁÉÍÓÚñÑ]+| ?[0-9]+| ?[^\s\w]+|\s+(?!\S)|\s+)"
