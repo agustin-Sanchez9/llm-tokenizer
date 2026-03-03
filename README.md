@@ -34,3 +34,5 @@ r""" ?\p{L}+| ?\p{N}+| ?[^\s\p{L}\p{N}]+|\s+(?!\S)|\s+"""
 Dado que mi bpe final fue realizado en C++ el patron cambia al sigueinte equivalente:
 
 R"( ?[a-zA-ZáéíóúÁÉÍÓÚñÑ]+| ?[0-9]+| ?[^\s\w]+|\s+(?!\S)|\s+)"
+
+El aplicar estas reglas de expresiones regulares logro optimizar los tokens. Se logro que con 5000 tokens existiera uno que fuese 'Quijote', cosa que sin la aplicacion de regex no se lograba ni con 10000 tokens.
